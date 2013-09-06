@@ -10,29 +10,30 @@ body {
 }
 
 /* Icons */
-.icon-infinity {
-  margin-left: 8px;
-  width: 100px;
-  height: 100px;
-  max-width: 100px;
-  max-height: 100px;
-  background-image: url(/img/icon-infinity.png);
+[class^="bicon-"],
+.icon-kys {
+  display: inline-block;
   background-position: 0 0;
-  background-size: 100px 100px;
   background-repeat: no-repeat;
   vertical-align: baseline;
 }
 
+.icon-kys {
+  margin-left: 5px;
+  width: 111px;
+  height: 110px;
+  max-width: 111px;
+  max-height: 110px;
+  background-image: url(/img/icon-kys.png);
+  background-size: 111px 110px;
+}
+
 [class^="bicon-"] {
-  display: inline-block;
   width: 100px;
   height: 100px;
   max-width: 100px;
   max-height: 100px;
-  background-position: 0 0;
   background-size: 100px 100px;
-  background-repeat: no-repeat;
-  vertical-align: baseline;
 }
 
 .bicon-compass {
