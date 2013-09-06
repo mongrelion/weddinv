@@ -1,0 +1,19 @@
+{
+  "name"            : "weddinv",
+  "version"         : "0.0.1",
+  "private"         : true,
+  "description"     : "WeddInv - Wedding Invitations Manager",
+  "repository"      : "private",
+  "url"             : "private",
+  "author"          : {
+    "name"  : "Carlos León",
+    "email" : "mail@carlosleon.info",
+    "url"   : "http://carlosleon.info"
+  },
+  "devDependencies" : {
+    "grunt"                : "latest",
+    "grunt-contrib-jshint" : "latest",
+    "grunt-contrib-concat" : "latest",
+    "grunt-contrib-watch"  : "latest"
+  }
+}

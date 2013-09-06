@@ -1,0 +1,6 @@
+# Ignore modules installed by NPM
+/node_modules/
+
+# Ignore compiled assets
+/public/js/
+/public/css/
