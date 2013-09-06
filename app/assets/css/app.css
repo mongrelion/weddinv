@@ -9,30 +9,79 @@ body {
   margin: 0;
 }
 
-.photo .icon-infinity {
+/* Icons */
+.icon-infinity {
   margin-left: 8px;
   width: 100px;
   height: 100px;
   max-width: 100px;
   max-height: 100px;
-  vertical-align: baseline;
   background-image: url(/img/icon-infinity.png);
   background-position: 0 0;
   background-size: 100px 100px;
   background-repeat: no-repeat;
+  vertical-align: baseline;
+}
+
+[class^="bicon-"] {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  max-width: 100px;
+  max-height: 100px;
+  background-position: 0 0;
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  vertical-align: baseline;
+}
+
+.bicon-compass {
+  background-image: url(/img/icon-compass.png);
+}
+
+.bicon-watch {
+  background-image: url(/img/icon-watch.png);
+}
+
+.side-bar {
+  border-radius: 4px 0 0 4px;
 }
 
 .main {
   color: #bdc3c7;
-  text-align: center;
   padding-right: 20px;
+  border-radius: 0 4px 4px 0;
 }
 
-.main .buttons .span3 {
+.main .header {
+  text-align: center;
+}
+
+.main p span {
+  margin-left: 15px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.main p [class^="bicon-"] {
+  vertical-align: middle;
+}
+
+.confirmation-box {
+  color: #2c3e50;
+  text-align: center;
+}
+
+.confirmation-box .span3 {
   margin-left: 0;
 }
 
-.main span.or {
+.confirmation-box span.or {
   display: inline-block;
   padding-top: 10px;
+}
+
+.confirmation-box button.confirmed {
+  width: 200px;
+  text-transform: uppercase;
 }

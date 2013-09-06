@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="weddinvApp">
   <head>
     <title>Weddinv</title>
     <!-- Stylesheets -->
@@ -7,21 +7,51 @@
     <!-- Javascripts -->
     <script src="/js/application.js" type="text/javascript" charset="utf-8"></script>
   </head>
-  <body class="palette-turquoise">
+  <body class="palette-wet-asphalt">
     <div class="container">
       <div class="row">
-        <div class="photo span2 palette-orange">
+        <div class="side-bar span2 palette-orange">
           <i class="icon-infinity">&nbsp;</i>
         </div>
 
-        <div class="main span9 palette-clouds">
-          <h1>Katherine Potts &amp; Sebasti&aacute;n Le&oacute;n</h1>
-          <p>would like to invite you to their wedding</p>
-          <p>The celebration will be hosted at BLAH</p>
-          <div class="buttons">
-            <button class="btn btn-large btn-info span3 pull-left">Confirm</button>
-            <span class="or">or</span>
-            <button class="btn btn-large btn-danger span3 pull-right">Deny</button>
+        <div class="main span9 palette-clouds" ng-controller="ConfirmInvitationCtrl">
+          <div class="header">
+            <h1>Katherine Potts &amp; Sebasti&aacute;n Le&oacute;n</h1>
+          </div>
+
+          <p>
+            <i class="bicon-watch"></i>
+            <span>Saturday, 4th of January - 2014. 17:00 COT</span>
+          </p>
+
+          <p>
+            <i class="bicon-compass"></i>
+            <span>Somewhere.</span>
+          </p>
+
+          <div class="confirmation-box" ng-switch on="invitation.status">
+            <hr />
+            <div ng-switch-when="pending">
+              <p><span>Are you going to be there?</span></p>
+              <br/>
+              <div class="buttons">
+                <button
+                  class="btn btn-large btn-info span3 pull-left"
+                  ng-click="rsvp('yes')">Yes</button>
+
+                <span class="or">or</span>
+
+                <button
+                  class="btn btn-large btn-danger span3 pull-right"
+                  ng-click="rsvp('no')">No</button>
+              </div>
+            </div>
+
+            <div ng-switch-default>
+              <button
+                class="btn btn-large confirmed"
+                ng-class="{'btn-info' : invitation.status === 'accepted', 'btn-danger' : invitation.status === 'rejected'}">{{invitation.status}}</button>
+            </div>
           </div>
         </div>
       </div>
