@@ -4,7 +4,7 @@
   angular.module('weddinvApp').
     controller('InvitationsListCtrl', ['$scope', 'Invitation', function($scope, Invitation) {
       var loadInvitations = function() {
-        $scope.invitations = Invitation.getList();
+        $scope.invitations = Invitation.all('invitations').getList();
       };
 
       loadInvitations();

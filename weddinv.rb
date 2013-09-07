@@ -63,7 +63,7 @@ class Weddinv < Sinatra::Base
   end
 
   def invitation_param
-    @invitation_param ||= json['invitation']
+    @invitation_param ||= Invitation.params_hash json
   end
 
   def json

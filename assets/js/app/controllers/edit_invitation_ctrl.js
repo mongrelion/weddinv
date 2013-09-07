@@ -3,7 +3,7 @@
 
   angular.module('weddinvApp').
     controller('EditInvitationCtrl', ['$scope', '$routeParams', '$location', 'Invitation', function($scope, $params, $location, Invitation) {
-      Invitation.one($params.id).get().then(function(invitation) {
+      Invitation.one('invitations', $params.id).get().then(function(invitation) {
         $scope.invitation = invitation;
       });
 

@@ -10,6 +10,17 @@ class Invitation
   # - Validations - #
   validates_presence_of :name, :email
 
+  # - Class Methods - #
+  class << self
+    def params_hash params
+      hash = {}
+      [:name, :email, :status, :plus_one].each do |k|
+        hash[k] = params[k.to_s] if params.keys.include?(k.to_s)
+      end
+      hash
+    end
+  end
+
   # - Instance Methods - #
   def accept!
     update_status! 'accepted'
