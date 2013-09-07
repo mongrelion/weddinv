@@ -98,3 +98,11 @@ body {
   font-size: 21px;
   line-height: 40px;
 }
+
+.control-group .controls label.checkbox input {
+  display: inherit;
+}
+
+.table tbody tr td.plus-one {
+  text-align: center;
+}

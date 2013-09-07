@@ -18,6 +18,7 @@
     <tr>
       <th>Invitee</th>
       <th>Email</th>
+      <th>Plus One?</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -26,6 +27,9 @@
     <tr ng-repeat="invitation in invitations | filter:search:strict">
       <td>{{invitation.name}}</td>
       <td>{{invitation.email}}</td>
+      <td class="plus-one">
+        <span ng-class="{'fui-check' : invitation.plus_one, 'fui-cross' : !invitation.plus_one}"></span>
+      </td>
       <td>
         <span
           class="label"

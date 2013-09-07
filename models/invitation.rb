@@ -5,6 +5,7 @@ class Invitation
   field :name
   field :email
   field :status, default: 'pending'
+  field :plus_one, type: Boolean, default: false
 
   # - Validations - #
   validates_presence_of :name, :email
