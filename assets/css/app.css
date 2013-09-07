@@ -88,3 +88,7 @@ body {
   width: 200px;
   text-transform: uppercase;
 }
+
+.btn-group.status-filter button.btn {
+  width: 100px;
+}

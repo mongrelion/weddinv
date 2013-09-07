@@ -12,6 +12,6 @@
         { label : 'Rejected', value : 'rejected' }
       ];
 
-      $scope.search = { status : '' };
+      $scope.search = { status : '', name : '' };
     }]);
 }());

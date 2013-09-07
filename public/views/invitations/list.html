@@ -1,25 +1,39 @@
-<div class="header">
+<div class="header clearfix">
   <h3>Invitations</h3>
+  <button class="btn btn-primary">New Invitation</button>
+</div>
+<br/>
+
+<div class="pull-left">
+  <input type="text" ng-model="search.name" placeholder="Search...">
 </div>
 
-<div class="btn-group pull-right clearfix">
+<div class="status-filter btn-group pull-right">
   <button ng-repeat="filter in filters" ng-click="search.status = filter.value" class="btn btn-info" ng-class="{active : search.status === filter.value}">{{filter.label}}</button>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Invitee</th>
+      <th>Email</th>
       <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="invitation in invitations | filter:search:strict">
       <td>{{invitation.name}}</td>
+      <td>{{invitation.email}}</td>
       <td>
         <span
           class="label"
           ng-class="{'label-success' : invitation.isAccepted(), 'label-warning' : invitation.isPending(), 'label-important' : invitation.isRejected()}">{{invitation.status}}</span>
+      </td>
+      <td>
+        <a href="#" ng-click="edit()"><span class="fui-new"></span></a>
+        <a href="#" ng-click="resendEmail()"><span class="fui-mail"></span></a>
+        <a href="#" ng-click="destroy()"><span class="fui-cross"></span></a>
       </td>
     </tr>
   </tbody>
