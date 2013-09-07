@@ -2,12 +2,12 @@ class Invitation
   include Mongoid::Document
 
   # - Fields - #
-  field :invitee_name
-  field :invitee_email
+  field :name
+  field :email
   field :status, default: 'pending'
 
   # - Validations - #
-  validates_presence_of :invitee_name, :invitee_email
+  validates_presence_of :name, :email
 
   # - Instance Methods - #
   def accept!

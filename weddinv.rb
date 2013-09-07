@@ -12,17 +12,33 @@ class Weddinv < Sinatra::Base
     rabl :'invitations/index'
   end
 
+  # - Create an invitation - #
+  post '/api/invitations', provides: [:json] do
+    @invitation = Invitation.create invitation_param
+    rabl :'invitations/show'
+  end
+
   # - Show an invitation - #
   get '/api/invitations/:id', provides: [:json] do
     @invitation = get_invitation params[:id]
     rabl :'invitations/show'
   end
 
-  # - Create an invitation - #
-  post '/api/invitations', provides: [:json] do
-    @invitation = Invitation.create invitation_param
-    rabl :'invitations/show'
+  # - Update an invitation - #
+  put '/api/invitations/:id', provides: [:json] do
+    if @invitation = get_invitation(params[:id])
+      @invitation.update_attributes invitation_param
+    end
   end
+
+  # - Destroy an invitation - #
+  delete '/api/invitations/:id', provides: [:json] do
+    if @invitation = get_invitation(params[:id])
+      @invitation.destroy
+    end
+    halt 204
+  end
+
 
   # - Accept an invitation - #
   post '/api/invitations/:id/accept', provides: [:json] do
@@ -36,13 +52,6 @@ class Weddinv < Sinatra::Base
     @invitation = get_invitation params[:id]
     @invitation.reject!
     rabl :'invitations/show'
-  end
-
-  delete '/api/invitations/:id', provides: [:json] do
-    if @invitation = get_invitation(params[:id])
-      @invitation.destroy
-    end
-    halt 204
   end
 
   get '/*' do
