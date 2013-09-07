@@ -36,8 +36,8 @@
 
           return invitation;
         });
-      });
+      }).all('invitations');
 
-      return Invitation.all('invitations');
+      return Invitation;
     }]);
 }());

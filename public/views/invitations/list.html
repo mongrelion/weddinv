@@ -32,9 +32,10 @@
           ng-class="{'label-success' : invitation.isAccepted(), 'label-warning' : invitation.isPending(), 'label-important' : invitation.isRejected()}">{{invitation.status}}</span>
       </td>
       <td>
+        <a ng-href="/rsvp/{{invitation.id}}"><span class="fui-eye"></span></a>
         <a ng-href="/invitations/{{invitation.id}}/edit" ng-click="edit()"><span class="fui-new"></span></a>
         <a href="#" ng-click="resendEmail(invitation.id)"><span class="fui-mail"></span></a>
-        <a href="#" ng-click="destroy(invitation.id)"><span class="fui-cross"></span></a>
+        <a href="#" ng-click="destroy($index)"><span class="fui-cross"></span></a>
       </td>
     </tr>
   </tbody>

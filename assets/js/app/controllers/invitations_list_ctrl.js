@@ -3,7 +3,11 @@
 
   angular.module('weddinvApp').
     controller('InvitationsListCtrl', ['$scope', 'Invitation', function($scope, Invitation) {
-      $scope.invitations = Invitation.getList();
+      var loadInvitations = function() {
+        $scope.invitations = Invitation.getList();
+      };
+
+      loadInvitations();
 
       $scope.filters = [
         { label : 'All',      value : ''         },
@@ -18,8 +22,13 @@
         alert('Resending email');
       };
 
-      $scope.destroy = function(invitationId) {
-        alert('Destroying invitation');
+      $scope.destroy = function($index) {
+        if (confirm('Are you sure?')) {
+          var invitation = $scope.invitations.$$v[$index];
+          invitation.remove().then(function() {
+            loadInvitations();
+          });
+        }
       };
     }]);
 }());
