@@ -6,26 +6,26 @@ module.exports = function(grunt) {
     concat : {
       js : {
         src : [
-          'app/assets/js/vendor/lodash.js',
-          'app/assets/js/vendor/angular.js',
-          'app/assets/js/vendor/*.js',
-          'app/assets/js/app/weddinv.js',
-          'app/assets/js/app/**/*.js'
+          'assets/js/vendor/lodash.js',
+          'assets/js/vendor/angular.js',
+          'assets/js/vendor/*.js',
+          'assets/js/app/weddinv.js',
+          'assets/js/app/**/*.js'
         ],
         dest : 'public/js/application.js'
       },
       css : {
         src : [
-          'app/assets/css/vendor/bootstrap.css',
-          'app/assets/css/vendor/flatui.css',
-          'app/assets/css/*.css'
+          'assets/css/vendor/bootstrap.css',
+          'assets/css/vendor/flatui.css',
+          'assets/css/*.css'
         ],
         dest : 'public/css/application.css'
       }
     },
     jshint : {
       gruntfile        : ['Gruntfile.js'],
-      application      : ['app/assets/js/app/**/*.js']
+      application      : ['assets/js/app/**/*.js']
     },
     watch : {
       gruntfile : {
@@ -33,11 +33,11 @@ module.exports = function(grunt) {
         tasks : ['jshint:gruntfile']
       },
       js : {
-        files : 'app/assets/js/app/**/*.js',
+        files : 'assets/js/app/**/*.js',
         tasks : ['jshint:application', 'concat:js']
       },
       css : {
-        files : 'app/assets/css/**/*.css',
+        files : 'assets/css/**/*.css',
         tasks : ['concat:css']
       }
     }
