@@ -7,9 +7,7 @@
         $scope.invitation = invitation;
       };
 
-      Invitation.
-        find($params.id).
-        then(exportInvitation);
+      $scope.invitation = Invitation.one($params.id).get();
 
       $scope.accept = function() {
         $scope.invitation.

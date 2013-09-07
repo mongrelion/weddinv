@@ -10,6 +10,14 @@
         when('/invitations', {
           controller  : 'InvitationsListCtrl',
           templateUrl : '/views/invitations/list.html'
+        }).
+        when('/invitations/new', {
+          controller  : 'NewInvitationCtrl',
+          templateUrl : '/views/invitations/new.html'
+        }).
+        when('/invitations/:id/edit', {
+          controller  : 'EditInvitationCtrl',
+          templateUrl : '/views/invitations/edit.html'
         });
 
       $location.html5Mode(true);

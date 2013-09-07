@@ -5,3 +5,7 @@ gem 'puma'
 gem 'mongoid'
 gem 'rabl'
 gem 'oj'
+
+group :development do
+  gem 'pry'
+end

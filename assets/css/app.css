@@ -90,5 +90,11 @@ body {
 }
 
 .btn-group.status-filter button.btn {
-  width: 100px;
+  width: 80px;
+}
+
+.dark {
+  color: #333333;
+  font-size: 21px;
+  line-height: 40px;
 }

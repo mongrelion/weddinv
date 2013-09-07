@@ -1,0 +1,33 @@
+<form name="form" class="form-horizontal" no-validate ng-submit="save()">
+  <div class="control-group">
+    <div class="controls">
+      <input
+      class="span4"
+      type="text"
+      ng-model="invitation.invitee_name"
+      ng-required="true"
+      ng-minlength="8"
+      placeholder="Name" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <input
+      class="span4"
+      type="email"
+      ng-model="invitation.invitee_email"
+      ng-required="true"
+      placeholder="Email" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <button
+      type="submit"
+      class="btn btn-primary span3 pull-left"
+      ng-disabled="form.$invalid || form.$pristine">Save
+    </button>
+    <a href="/invitations" class="btn btn-danger span3 pull-right">Cancel</a>
+  </div>
+</form>

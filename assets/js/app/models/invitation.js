@@ -38,10 +38,6 @@
         });
       });
 
-      Invitation.find = function(id) {
-        return Invitation.one('invitations', id).get();
-      };
-
-      return Invitation;
+      return Invitation.all('invitations');
     }]);
 }());

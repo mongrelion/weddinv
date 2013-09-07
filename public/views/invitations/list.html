@@ -1,8 +1,9 @@
-<div class="header clearfix">
-  <h3>Invitations</h3>
-  <button class="btn btn-primary">New Invitation</button>
+<div class="clearfix">
+  <span class="dark">Invitations</span>
+  <span class="pull-right"><a class="btn btn-danger" href="/invitations/new">New Invitation</a></span>
 </div>
-<br/>
+
+<hr />
 
 <div class="pull-left">
   <input type="text" ng-model="search.name" placeholder="Search...">
@@ -31,9 +32,9 @@
           ng-class="{'label-success' : invitation.isAccepted(), 'label-warning' : invitation.isPending(), 'label-important' : invitation.isRejected()}">{{invitation.status}}</span>
       </td>
       <td>
-        <a href="#" ng-click="edit()"><span class="fui-new"></span></a>
-        <a href="#" ng-click="resendEmail()"><span class="fui-mail"></span></a>
-        <a href="#" ng-click="destroy()"><span class="fui-cross"></span></a>
+        <a ng-href="/invitations/{{invitation.id}}/edit" ng-click="edit()"><span class="fui-new"></span></a>
+        <a href="#" ng-click="resendEmail(invitation.id)"><span class="fui-mail"></span></a>
+        <a href="#" ng-click="destroy(invitation.id)"><span class="fui-cross"></span></a>
       </td>
     </tr>
   </tbody>

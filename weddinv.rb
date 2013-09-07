@@ -18,6 +18,13 @@ class Weddinv < Sinatra::Base
     rabl :'invitations/show'
   end
 
+  # - Create an invitation - #
+  post '/api/invitations', provides: [:json] do
+    Logger.new($stdout).info invitation_param
+    @invitation = Invitation.create invitation_param
+    rabl :'invitations/show'
+  end
+
   # - Accept an invitation - #
   post '/api/invitations/:id/accept', provides: [:json] do
     @invitation = get_invitation params[:id]
@@ -38,5 +45,14 @@ class Weddinv < Sinatra::Base
 
   def get_invitation id
     Invitation.find id
+  end
+
+  def invitation_param
+    @invitation_param ||= json['invitation']
+  end
+
+  def json
+    @request_body ||= request.body.rewind
+    @json         ||= JSON.parse(request.body.read)
   end
 end

@@ -6,6 +6,9 @@ class Invitation
   field :invitee_email
   field :status, default: 'pending'
 
+  # - Validations - #
+  validates_presence_of :invitee_name, :invitee_email
+
   # - Instance Methods - #
   def accept!
     update_status! 'accepted'
