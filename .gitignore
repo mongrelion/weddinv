@@ -1,6 +1,9 @@
-# Ignore modules installed by NPM
+# Ignore modules installed by NPM.
 /node_modules/
 
-# Ignore compiled assets
+# Ignore compiled assets.
 /public/js/
 /public/css/
+
+# Ignore Mongoid configuration file.
+/config/mongoid.yml
