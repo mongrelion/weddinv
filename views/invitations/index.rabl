@@ -1,2 +1,2 @@
-object @invitation
+collection @invitations
 extends 'invitations/base'

@@ -1,0 +1,22 @@
+<div class="header">
+  <h3>Invitations</h3>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Invitee</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="invitation in invitations">
+      <td>{{invitation.name}}</td>
+      <td>
+        <span
+          class="label"
+          ng-class="{'label-success' : invitation.isAccepted(), 'label-warning' : invitation.isPending(), 'label-important' : invitation.isRejected()}">{{invitation.status}}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

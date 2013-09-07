@@ -22,6 +22,18 @@
             return rsvp('reject');
           };
 
+          invitation.isAccepted = function() {
+            return 'accepted' === invitation.status;
+          };
+
+          invitation.isRejected = function() {
+            return 'rejected' === invitation.status;
+          };
+
+          invitation.isPending = function() {
+            return 'pending' === invitation.status;
+          };
+
           return invitation;
         });
       });

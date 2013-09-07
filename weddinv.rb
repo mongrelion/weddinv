@@ -7,21 +7,26 @@ class Weddinv < Sinatra::Base
     end
   end
 
+  get '/api/invitations', provides: [:json] do
+    @invitations = Invitation.all
+    rabl :'invitations/index'
+  end
+
   # - Show an invitation - #
-  get '/invitations/:id', provides: [:json] do
+  get '/api/invitations/:id', provides: [:json] do
     @invitation = get_invitation params[:id]
     rabl :'invitations/show'
   end
 
   # - Accept an invitation - #
-  post '/invitations/:id/accept', provides: [:json] do
+  post '/api/invitations/:id/accept', provides: [:json] do
     @invitation = get_invitation params[:id]
     @invitation.accept!
     rabl :'invitations/show'
   end
 
   # - Reject an invitation - #
-  post '/invitations/:id/reject', provides: [:json] do
+  post '/api/invitations/:id/reject', provides: [:json] do
     @invitation = get_invitation params[:id]
     @invitation.reject!
     rabl :'invitations/show'
