@@ -5,7 +5,12 @@ module.exports = function(grunt) {
     pkg    : grunt.file.readJSON('package.json'),
     concat : {
       js : {
-        src  : ['app/assets/js/vendor/angular.js', 'app/assets/js/vendor/*.js', 'app/assets/js/app/**/*.js'],
+        src : [
+          'app/assets/js/vendor/angular.js',
+          'app/assets/js/vendor/*.js',
+          'app/assets/js/app/weddinv.js',
+          'app/assets/js/app/**/*.js'
+        ],
         dest : 'public/js/application.js'
       },
       css : {

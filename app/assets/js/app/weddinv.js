@@ -1,20 +1,12 @@
-angular.module('weddinvApp', []).
-  controller('ConfirmInvitationCtrl', ['$scope', function($scope) {
-    $scope.invitation = {
-      status : 'pending',
-      accept : function() {
-        this.status = 'accepted';
-      },
-      reject : function() {
-        this.status = 'rejected';
-      }
-    };
+(function() {
+  var deps = ['ngResource', 'ngRoute'];
+  angular.module('weddinvApp', deps).
+    config(['$routeProvider', '$locationProvider', function($router, $location) {
+      $router.when('/rsvp/:id', {
+        controller  : 'RsvpCtrl',
+        templateUrl : '/views/rsvp.html'
+      });
 
-    $scope.rsvp = function(opt) {
-      if ('yes' === opt) {
-        $scope.invitation.accept();
-      } else if ('no' === opt) {
-        $scope.invitation.reject();
-      }
-    };
-  }]);
+      $location.html5Mode(true);
+    }]);
+}());
