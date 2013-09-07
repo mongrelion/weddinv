@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     concat : {
       js : {
         src : [
+          'app/assets/js/vendor/lodash.js',
           'app/assets/js/vendor/angular.js',
           'app/assets/js/vendor/*.js',
           'app/assets/js/app/weddinv.js',

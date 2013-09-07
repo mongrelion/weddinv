@@ -7,12 +7,32 @@ class App < Sinatra::Base
     end
   end
 
-  get '/api/invitations/:id', provides: [:json] do
-    @invitation = Invitation.find params[:id]
+  # - Show an invitation - #
+  get '/invitations/:id', provides: [:json] do
+    sleep 3
+    @invitation = get_invitation params[:id]
+    rabl :'invitations/show'
+  end
+
+  # - Accept an invitation - #
+  post '/invitations/:id/accept', provides: [:json] do
+    @invitation = get_invitation params[:id]
+    @invitation.accept!
+    rabl :'invitations/show'
+  end
+
+  # - Reject an invitation - #
+  post '/invitations/:id/reject', provides: [:json] do
+    @invitation = get_invitation params[:id]
+    @invitation.reject!
     rabl :'invitations/show'
   end
 
   get '/*' do
     File.read File.join 'public', 'index.html'
+  end
+
+  def get_invitation id
+    Invitation.find id
   end
 end

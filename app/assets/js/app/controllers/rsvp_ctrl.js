@@ -2,16 +2,16 @@
   'use strict';
 
   angular.module('weddinvApp').
-    controller('RsvpCtrl', ['$scope', '$routeParams', 'Invitation', function($scope, $params, Invitation) {
-      Invitation.get({ id : $params.id }, function(invitation) {
+    controller('RsvpCtrl', ['$scope', '$routeParams', 'Restangular', function($scope, $params, Restangular) {
+      var exportInvitation = function(invitation) {
         $scope.invitation = invitation;
-      });
+      };
 
-      $scope.rsvp = function(opt) {
-        if ('yes' === opt) {
-          $scope.invitation.accept();
-        } else if ('no' === opt) {
-          $scope.invitation.reject();
+      Restangular.one('invitations', $params.id).get().then(exportInvitation);
+
+      $scope.rsvp = function(action) {
+        if (_.contains(['accept', 'reject'], action)) {
+          $scope.invitation.post(action).then(exportInvitation);
         }
       };
     }]);
