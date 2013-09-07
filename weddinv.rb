@@ -1,4 +1,4 @@
-class App < Sinatra::Base
+class Weddinv < Sinatra::Base
   configure do
     Mongoid.load! './config/mongoid.yml'
     Rabl.register!
@@ -9,7 +9,6 @@ class App < Sinatra::Base
 
   # - Show an invitation - #
   get '/invitations/:id', provides: [:json] do
-    sleep 3
     @invitation = get_invitation params[:id]
     rabl :'invitations/show'
   end
