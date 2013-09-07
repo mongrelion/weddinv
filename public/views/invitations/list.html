@@ -2,6 +2,10 @@
   <h3>Invitations</h3>
 </div>
 
+<div class="btn-group pull-right clearfix">
+  <button ng-repeat="filter in filters" ng-click="search.status = filter.value" class="btn btn-info" ng-class="{active : search.status === filter.value}">{{filter.label}}</button>
+</div>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -10,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="invitation in invitations">
+    <tr ng-repeat="invitation in invitations | filter:search:strict">
       <td>{{invitation.name}}</td>
       <td>
         <span
