@@ -1,6 +1,5 @@
 class WeddinvApp < Sinatra::Base
-  #use Rack::Session::Pool, expire_after: 2592000
-  use Rack::Session::Pool, expire_after: 30
+  use Rack::Session::Pool, expire_after: 1800
   set :session_secret, 'a6fc2b4d2b1f6790676a9fff6d77cb2341825c150d22d1a06d24290071b443d4'
 
   configure do
@@ -37,14 +36,18 @@ class WeddinvApp < Sinatra::Base
   end
 
   get '/api/invitations', provides: [:json] do
-    @invitations = Invitation.all
-    rabl :'invitations/index'
+    user_required do
+      @invitations = Invitation.all
+      rabl :'invitations/index'
+    end
   end
 
   # - Create an invitation - #
   post '/api/invitations', provides: [:json] do
-    @invitation = Invitation.create invitation_param
-    rabl :'invitations/show'
+    user_required do
+      @invitation = Invitation.create invitation_param
+      rabl :'invitations/show'
+    end
   end
 
   # - Show an invitation - #
@@ -55,32 +58,39 @@ class WeddinvApp < Sinatra::Base
 
   # - Update an invitation - #
   put '/api/invitations/:id', provides: [:json] do
-    if @invitation = get_invitation(params[:id])
-      @invitation.update_attributes invitation_param
+    user_required do
+      if @invitation = get_invitation(params[:id])
+        @invitation.update_attributes invitation_param
+      end
     end
   end
 
   # - Destroy an invitation - #
   delete '/api/invitations/:id', provides: [:json] do
-    if @invitation = get_invitation(params[:id])
-      @invitation.destroy
+    user_required do
+      if @invitation = get_invitation(params[:id])
+        @invitation.destroy
+      end
+      halt_ok
     end
-    halt_ok
   end
-
 
   # - Accept an invitation - #
   post '/api/invitations/:id/accept', provides: [:json] do
-    @invitation = get_invitation params[:id]
-    @invitation.accept!
-    rabl :'invitations/show'
+    user_required do
+      @invitation = get_invitation params[:id]
+      @invitation.accept!
+      rabl :'invitations/show'
+    end
   end
 
   # - Reject an invitation - #
   post '/api/invitations/:id/reject', provides: [:json] do
-    @invitation = get_invitation params[:id]
-    @invitation.reject!
-    rabl :'invitations/show'
+    user_required do
+      @invitation = get_invitation params[:id]
+      @invitation.reject!
+      rabl :'invitations/show'
+    end
   end
 
   get '/*' do
@@ -114,5 +124,13 @@ class WeddinvApp < Sinatra::Base
 
   def user_signed_in?
     session[:user_id].present?
+  end
+
+  def user_required &blk
+    if user_signed_in?
+      yield
+    else
+      halt_forbidden
+    end
   end
 end
