@@ -2,25 +2,26 @@
   'use strict';
 
   angular.module('weddinvApp').
-    controller('SessionsCtrl', ['$scope', '$location', 'Session', 'Restangular', function($scope, $location, Session, Restangular) {
-      window.Restangular = Restangular;
+    controller('SessionsCtrl', ['$scope', '$location', 'Session', function($scope, $location, Session) {
       $scope.loginFailed = false;
 
       $scope.login = function() {
-        Session.
-          login($scope.username, $scope.password).
-          then(function() {
-            // This is in case the login was successfull.
-            $scope.loginFailed = false;
-            $location.path('/invitations');
-          }, function() {
-            // This is in case the login was not successfull.
-            $scope.loginFailed = true;
-          });
+        Session.login($scope.username, $scope.password, function() {
+          $scope.$emit('session:login');
+          $scope.loginFailed = false;
+          $location.path('/invitations');
+        }, function() {
+          $scope.loginFailed = true;
+        });
       };
 
       $scope.logout = function() {
-        Session.logout();
+        Session.
+          logout().
+          then(function() {
+            $scope.$emit('session:logout');
+            $location.path('/login');
+          });
       };
     }]);
 }());

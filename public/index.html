@@ -7,11 +7,18 @@
     <!-- Javascripts -->
     <script src="/js/application.js" type="text/javascript" charset="utf-8"></script>
   </head>
-  <body class="palette-midnight-blue">
+  <body class="palette-midnight-blue" ng-controller="MainCtrl">
     <div class="container">
       <div class="row">
         <div class="side-bar span2 palette-orange">
-          <i class="icon-kys">&nbsp;</i>
+          <div>
+            <i class="icon-kys">&nbsp;</i>
+          </div>
+          <br />
+          <div class="span2" ng-controller="SessionsCtrl">
+            <button class="btn btn-danger" ng-click="logout()" ng-show="loggedIn">Logout</button>
+            <a class="btn btn-danger" href="/login" ng-hide="loggedIn">Login</a>
+          </div>
         </div>
 
         <div class="main span9 palette-clouds" ng-view>

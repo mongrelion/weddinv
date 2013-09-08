@@ -8,15 +8,26 @@
         loggedIn : false
       };
 
-      Session.login = function(username, password) {
+      Session.login = function(username, password, success, error) {
         return Restangular.
           all('login').
-          post({ username : username, password : password });
+          post({ username : username, password : password }).
+          then(function() {
+            Session.loggedIn = true;
+            if (success) success();
+          }, function() {
+            Session.loggedIn = false;
+            if (error) error();
+          });
       };
 
       Session.logout = function() {
-        this.loggedIn = false;
-        return true;
+        return Restangular.
+          all('logout').
+          post().
+          then(function() {
+            Session.loggedIn = false;
+          });
       };
 
       return Session;

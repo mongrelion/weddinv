@@ -1,6 +1,12 @@
 class WeddinvApp < Sinatra::Base
+  #use Rack::Session::Pool, expire_after: 2592000
+  use Rack::Session::Pool, expire_after: 30
+  set :session_secret, 'a6fc2b4d2b1f6790676a9fff6d77cb2341825c150d22d1a06d24290071b443d4'
+
   configure do
     Mongoid.load! './config/mongoid.yml'
+    Mongoid.raise_not_found_error = false
+
     Rabl.register!
     Rabl.configure do |config|
       config.include_json_root = false
@@ -8,13 +14,26 @@ class WeddinvApp < Sinatra::Base
   end
 
   # - Sessions - #
+  get '/api/user', provides: [:json] do
+    if user_signed_in?
+      halt_ok
+    else
+      halt_forbidden
+    end
+  end
+
   post '/api/login', provides: [:json] do
     if @user = User.authenticate(json['username'], json['password'])
       session[:user_id] = @user.id
-      halt 200
+      halt_ok
     else
-      halt 403
+      halt_forbidden
     end
+  end
+
+  post '/api/logout', provides: [:json] do
+    session.delete :user_id
+    halt_ok
   end
 
   get '/api/invitations', provides: [:json] do
@@ -46,7 +65,7 @@ class WeddinvApp < Sinatra::Base
     if @invitation = get_invitation(params[:id])
       @invitation.destroy
     end
-    halt 204
+    halt_ok
   end
 
 
@@ -79,5 +98,21 @@ class WeddinvApp < Sinatra::Base
   def json
     @request_body ||= request.body.rewind
     @json         ||= JSON.parse(request.body.read) rescue {}
+  end
+
+  def halt_ok
+    halt 200
+  end
+
+  def halt_forbidden
+    halt 403
+  end
+
+  def current_user
+    @current_user ||= User.find session[:user_id] if user_signed_in?
+  end
+
+  def user_signed_in?
+    session[:user_id].present?
   end
 end
