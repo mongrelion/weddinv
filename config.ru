@@ -3,7 +3,8 @@ require 'bundler'
 
 Bundler.require
 
-require 'pry'
+require './lib/weddinv/securable'
+require './models/user'
 require './models/invitation'
-require './weddinv'
-run Weddinv
+require './weddinv_app'
+run WeddinvApp

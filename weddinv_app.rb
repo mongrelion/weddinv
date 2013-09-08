@@ -1,9 +1,19 @@
-class Weddinv < Sinatra::Base
+class WeddinvApp < Sinatra::Base
   configure do
     Mongoid.load! './config/mongoid.yml'
     Rabl.register!
     Rabl.configure do |config|
       config.include_json_root = false
+    end
+  end
+
+  # - Sessions - #
+  post '/login', provides: [:json] do
+    if @user = User.authenticate(json['username'], json['password'])
+      session[:user_id] = @user.id
+      halt 200
+    else
+      halt 403
     end
   end
 
@@ -68,6 +78,6 @@ class Weddinv < Sinatra::Base
 
   def json
     @request_body ||= request.body.rewind
-    @json         ||= JSON.parse(request.body.read)
+    @json         ||= JSON.parse(request.body.read) rescue {}
   end
 end
