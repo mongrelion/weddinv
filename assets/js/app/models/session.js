@@ -4,8 +4,16 @@
   angular.module('weddinvApp').
     factory('Session', ['Restangular', function(Restangular) {
       Restangular.all('login');
+
       var Session = {
         loggedIn : false
+      };
+
+      Session.isLoggedIn = function(yes, no) {
+        Restangular.
+          one('user').
+          get().
+          then(yes, no);
       };
 
       Session.login = function(username, password, success, error) {

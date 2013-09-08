@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('weddinvApp').
-    controller('MainCtrl', ['$scope', 'Restangular', function($scope, Restangular) {
-      Restangular.one('user').get().then(function() {
+    controller('MainCtrl', ['$scope', 'Session', function($scope, Session) {
+      Session.isLoggedIn(function() {
         $scope.loggedIn = true;
       }, function() {
         $scope.loggedIn = false;
