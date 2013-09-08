@@ -8,7 +8,7 @@ class WeddinvApp < Sinatra::Base
   end
 
   # - Sessions - #
-  post '/login', provides: [:json] do
+  post '/api/login', provides: [:json] do
     if @user = User.authenticate(json['username'], json['password'])
       session[:user_id] = @user.id
       halt 200

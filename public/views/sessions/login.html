@@ -1,0 +1,34 @@
+<legend>Login</legend>
+<form name="form" class="form-horizontal" no-validate ng-submit="login()">
+  <div class="alert alert-error" ng-show="loginFailed">Invalid credentials.</div>
+  <div class="control-group">
+    <div class="controls">
+      <input
+      class="span4"
+      type="text"
+      ng-model="username"
+      ng-required="true"
+      placeholder="Username" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <input
+      class="span4"
+      type="password"
+      ng-model="password"
+      ng-required="true"
+      placeholder="Password" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <button
+      type="submit"
+      class="btn btn-info span3 pull-left"
+      ng-disabled="form.$invalid || form.$pristine">Login
+    </button>
+    <a href="/" class="btn btn-danger span3 pull-right">Cancel</a>
+  </div>
+</form>

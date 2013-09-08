@@ -18,6 +18,10 @@
         when('/invitations/:id/edit', {
           controller  : 'EditInvitationCtrl',
           templateUrl : '/views/invitations/edit.html'
+        }).
+        when('/login', {
+          controller  : 'SessionsCtrl',
+          templateUrl : '/views/sessions/login.html'
         });
 
       $location.html5Mode(true);
