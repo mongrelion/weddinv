@@ -1,8 +1,11 @@
 <div class="header">
   <h1>Katherine Potts &amp; Sebasti&aacute;n Le&oacute;n</h1>
   <h4>
-    would like to you know if you, <b>{{invitation.name}}</b>, are going to
-    assist to their wedding.
+    <span>would like to you know if you</span>
+    <span><b>{{invitation.name}}</b></span>
+    <span ng-show="invitation.plus_one"> and <b>{{invitation.plus_one_name}}</b></span>
+    <span>are going to</span>
+    <span>assist to their wedding.</span>
   </h4>
 </div>
 

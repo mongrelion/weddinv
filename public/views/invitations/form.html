@@ -30,6 +30,19 @@
     </div>
   </div>
 
+  <div class="control-group" ng-show="invitation.plus_one">
+    <div class="controls">
+      <input
+      class="span4"
+      type="text"
+      ng-model="invitation.plus_one_name"
+      ng-required="invitation.plus_one"
+      ng-minlength="8"
+      placeholder="Plus One's Name" />
+    </div>
+  </div>
+
+
   <div class="control-group">
     <button
       type="submit"

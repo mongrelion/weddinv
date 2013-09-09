@@ -6,6 +6,7 @@ class Invitation
   field :email
   field :status, default: 'pending'
   field :plus_one, type: Boolean, default: false
+  field :plus_one_name
 
   # - Validations - #
   validates_presence_of :name, :email
@@ -14,7 +15,7 @@ class Invitation
   class << self
     def params_hash params
       hash = {}
-      [:name, :email, :status, :plus_one].each do |k|
+      [:name, :email, :status, :plus_one, :plus_one_name].each do |k|
         hash[k] = params[k.to_s] if params.keys.include?(k.to_s)
       end
       hash
