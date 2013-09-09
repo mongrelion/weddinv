@@ -30,6 +30,6 @@
           });
           clearInterval(intervalId);
         }
-      }, 1000);
+      }, 200);
     }]);
 }());
