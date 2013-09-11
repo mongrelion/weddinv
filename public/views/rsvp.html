@@ -25,7 +25,19 @@
 <div class="confirmation-box" ng-switch on="invitation.status">
   <hr />
   <div ng-switch-when="pending">
-    <p><span>Are you going to be there?</span></p>
+    <p>
+      <span>Are you</span>
+      <span ng-show="invitation.plus_one">
+        and your
+        <select class="span1"
+          ng-model="invitation.attending_plus_one_count"
+          ng-required="invitation.plus_one"
+          ng-options="value for value in pocMap">
+        </select>
+        partners
+      </span>
+      <span>going to be there?</span>
+    </p>
     <br/>
     <div class="buttons">
       <button

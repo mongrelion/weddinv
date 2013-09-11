@@ -37,11 +37,23 @@
       type="text"
       ng-model="invitation.plus_one_name"
       ng-required="invitation.plus_one"
-      ng-minlength="8"
+      ng-minlength="6"
       placeholder="Plus One's Name" />
     </div>
   </div>
 
+  <div class="control-group" ng-show="invitation.plus_one">
+    <div class="controls">
+      <input
+      class="span4"
+      type="number"
+      ng-model="invitation.plus_one_count"
+      ng-required="invitation.plus_one"
+      min="1"
+      max="5"
+      value="1"/>
+    </div>
+  </div>
 
   <div class="control-group">
     <button

@@ -77,20 +77,16 @@ class WeddinvApp < Sinatra::Base
 
   # - Accept an invitation - #
   post '/api/invitations/:id/accept', provides: [:json] do
-    user_required do
-      @invitation = get_invitation params[:id]
-      @invitation.accept!
-      rabl :'invitations/show'
-    end
+    @invitation = get_invitation params[:id]
+    @invitation.accept! invitation_param[:attending_plus_one_count]
+    rabl :'invitations/show'
   end
 
   # - Reject an invitation - #
   post '/api/invitations/:id/reject', provides: [:json] do
-    user_required do
-      @invitation = get_invitation params[:id]
-      @invitation.reject!
-      rabl :'invitations/show'
-    end
+    @invitation = get_invitation params[:id]
+    @invitation.reject!
+    rabl :'invitations/show'
   end
 
   get '/*' do

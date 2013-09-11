@@ -61,9 +61,12 @@ body {
 }
 
 .main p span {
-  margin-left: 15px;
   font-size: 22px;
   font-weight: bold;
+}
+
+.main p span:first {
+  margin-left: 15px;
 }
 
 .main p [class^="bicon-"] {
