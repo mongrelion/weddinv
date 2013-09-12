@@ -11,6 +11,7 @@
         one('invitations', $params.id).
         get().
         then(function(invitation) {
+          // TODO: Maybe move this into a directive.
           if (invitation.isPending() && invitation.attending_plus_one_count === 0) {
             invitation.attending_plus_one_count = invitation.plus_one_count;
           }

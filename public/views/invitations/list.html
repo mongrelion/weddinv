@@ -5,10 +5,21 @@
 
 <hr />
 
+<!-- TODO: Move this to a directive -->
+<div class="well">
+  <p>Total of people assisting the event: <b>{{totalAssistants}}</b></p>
+  <p>Total of invitations: <b>{{totalInvitations}}</b></p>
+  <p>Total of accepted inviations: <b>{{totalAcceptedInvitations}}</b></p>
+  <p>Total of rejected invitations: <b>{{totalRejectedInvitations}}</b></p>
+  <p>Total of pending invitations: <b>{{totalPendingInvitations}}</b></p>
+</div>
+
+
 <div class="pull-left">
   <input type="text" ng-model="search.name" placeholder="Search...">
 </div>
 
+<!-- TODO: Maybe move this to a directive -->
 <div class="status-filter btn-group pull-right">
   <button ng-repeat="filter in filters" ng-click="search.status = filter.value" class="btn btn-info" ng-class="{active : search.status === filter.value}">{{filter.label}}</button>
 </div>
