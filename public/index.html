@@ -10,17 +10,27 @@
   <body class="palette-midnight-blue" ng-controller="MainCtrl">
     <div class="container">
       <div class="row">
-        <div class="side-bar span2 palette-orange">
-          <div>
+        <!-- Side bar -->
+        <div class="sidebar span2 palette-orange">
+          <div class="row">
             <i class="icon-kys">&nbsp;</i>
           </div>
-          <br />
-          <div class="span2" ng-controller="SessionsCtrl">
-            <button class="btn btn-danger" ng-click="logout()" ng-show="loggedIn">Logout</button>
-            <a class="btn btn-danger" href="/login" ng-hide="loggedIn">Login</a>
+
+          <div class="row">
+            <div class="span2" ng-controller="SessionsCtrl">
+              <button class="btn btn-danger" ng-click="logout()" ng-show="loggedIn">Logout</button>
+              <a class="btn btn-danger" href="/login" ng-hide="loggedIn">Login</a>
+            </div>
+
+            <div class="span2 credits">
+              <p>
+                By <a href="http://carlosleon.info" target="_blank">Carlos Le&oacute;n</a>
+              </p>
+            </div>
           </div>
         </div>
 
+        <!-- Main container -->
         <div class="main span9 palette-clouds" ng-view>
         </div>
       </div>
