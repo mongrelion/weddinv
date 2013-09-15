@@ -12,6 +12,18 @@ class WeddinvApp < Sinatra::Base
     end
   end
 
+  configure :development do
+    # - Send email to MailCatcher's local instance - #
+    Pony.options = {
+      from:        'contact@example.org',
+      via:         :smtp,
+      via_options: {
+        address: 'localhost',
+        port:    1025
+      }
+    }
+  end
+
   # - Sessions - #
   get '/api/user', provides: [:json] do
     if user_signed_in?
