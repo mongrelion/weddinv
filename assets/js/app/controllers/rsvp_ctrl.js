@@ -24,7 +24,6 @@
         });
 
       $scope.accept = function() {
-        console.log($scope.invitation);
         $scope.invitation.
           accept().
           then(exportInvitation);
