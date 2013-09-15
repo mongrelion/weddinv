@@ -5,7 +5,7 @@
       $router.
         when('/rsvp/:id', {
           controller  : 'RsvpCtrl',
-          templateUrl : '/views/rsvp.html'
+          templateUrl : '/views/invitations/rsvp.html'
         }).
         when('/invitations', {
           controller    : 'InvitationsListCtrl',
