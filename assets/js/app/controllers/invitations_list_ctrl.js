@@ -8,34 +8,7 @@
           all('invitations').
           getList().
           then(function(invitations) {
-            // TODO: Move this to a directive to clean up the controller.
             $scope.invitations = invitations;
-
-            var totalInvitations         = invitations.length,
-                totalAcceptedInvitations = 0,
-                totalRejectedInvitations = 0,
-                totalPendingInvitations  = 0,
-                totalAssistants          = 0;
-            _.forEach(invitations, function(invitation) {
-              switch(invitation.status) {
-                case 'accepted':
-                  totalAcceptedInvitations++;
-                  totalAssistants++;
-                  totalAssistants += invitation.attending_plus_one_count;
-                  break;
-                case 'rejected':
-                  totalRejectedInvitations++;
-                  break;
-                case 'pending':
-                  totalPendingInvitations++;
-                  break;
-              }
-            });
-            $scope.totalInvitations         = totalInvitations;
-            $scope.totalAcceptedInvitations = totalAcceptedInvitations;
-            $scope.totalRejectedInvitations = totalRejectedInvitations;
-            $scope.totalPendingInvitations  = totalPendingInvitations;
-            $scope.totalAssistants          = totalAssistants;
           });
       };
 
