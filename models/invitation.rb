@@ -18,7 +18,7 @@ class Invitation
     def params_hash params
       hash = {}
       authorized_fields.each do |k|
-        hash[k] = params[k.to_s] if params.keys.include?(k.to_s)
+        hash[k] = params[k] if params.keys.include?(k)
       end
       hash
     end
@@ -46,10 +46,6 @@ class Invitation
   end
 
   def reject!
-    update_status! 'rejected'
-  end
-
-  def update_status! status
-    update_attributes!(status: status) if self.status.eql? 'pending'
+    update_attributes! status: 'rejected'
   end
 end
