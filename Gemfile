@@ -11,3 +11,8 @@ group :development do
   gem 'pry', '~> 0.9.12.2'
   gem 'mailcatcher', '~> 0.5.12'
 end
+
+group :development, :test do
+  gem 'minitest', '~> 5.0.6'
+  gem 'rake',     '~> 10.0.1'
+end

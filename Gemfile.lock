@@ -28,6 +28,7 @@ GEM
       thin (~> 1.5.0)
     method_source (0.8.1)
     mime-types (1.25)
+    minitest (5.0.6)
     mongoid (3.1.4)
       activemodel (~> 3.2)
       moped (~> 1.4)
@@ -51,6 +52,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
+    rake (10.0.4)
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -75,10 +77,12 @@ PLATFORMS
 
 DEPENDENCIES
   mailcatcher (~> 0.5.12)
+  minitest (~> 5.0.6)
   mongoid (~> 3.1.4)
   oj (~> 2.1.4)
   pony (~> 1.5.1)
   pry (~> 0.9.12.2)
   puma (~> 2.5.1)
   rabl (~> 0.8.6)
+  rake (~> 10.0.1)
   sinatra (~> 1.4.3)
