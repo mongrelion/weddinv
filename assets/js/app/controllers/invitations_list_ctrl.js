@@ -22,8 +22,12 @@
         { label : 'Rejected', value : 'rejected' }
       ];
 
-      $scope.resendEmail = function(invitationId) {
-        alert('Not yet implemented!');
+      $scope.resendEmail = function($index) {
+        var invitation = $scope.invitations[$index];
+        window.invitation = invitation;
+        if (confirm('Are you sure?')) {
+          invitation.resendEmail();
+        }
       };
 
       $scope.destroy = function($index) {

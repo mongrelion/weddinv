@@ -14,6 +14,10 @@
             }
           };
 
+          invitation.resendEmail = function() {
+            return invitation.post('resend_email');
+          };
+
           invitation.accept = function() {
             return rsvp('accept');
           };

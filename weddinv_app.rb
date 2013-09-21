@@ -77,6 +77,15 @@ class WeddinvApp < Sinatra::Base
     end
   end
 
+  # - Resend an invitation email - #
+  post '/api/invitations/:id/resend_email', provides: [:json] do
+    user_required do
+      if @invitation = get_invitation(params[:id])
+        @invitation.send_invitation_email
+      end
+    end
+  end
+
   # - Destroy an invitation - #
   delete '/api/invitations/:id', provides: [:json] do
     user_required do

@@ -60,8 +60,6 @@ class Invitation
     "#{self.class.base_url}/rsvp/#{id}" if persisted?
   end
 
-  protected
-
   def send_invitation_email
     Mailer.deliver_invitation self if persisted?
   end
