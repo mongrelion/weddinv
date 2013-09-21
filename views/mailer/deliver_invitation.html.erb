@@ -1,13 +1,41 @@
-<div style="">
-  <p>Hi!</p>
-  <p>
-  We would like to know if you could please confirm your assistance to the
-  <br />
-  wedding clicking <a href="<%= @invitation_link %>">here</a>.
-  <br/>
-  Thanks.
-  <br/>
-  <br/>
-  Katie &amp; Sebasti&aacute;an.
-  </p>
-</div>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+      body {
+        background-color: #f2f2f2;
+      }
+      .message {
+        background-color: #fff;
+        color: #606060;
+        width:500px;
+        padding:20px;
+        font-family:Helvetica,Tahoma;
+        margin: 0 auto;
+      }
+      .message a,
+      .message a:hover,
+      .message a:visited {
+        color: #3498DB;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message">
+      <h1>Hi!</h1>
+      <p>
+        We would like to know if you could please confirm your assistance to
+        <br />
+        the wedding clicking <a href="<%= @invitation_link %>">here</a>.
+        <br/>
+        <br/>
+        Thanks.
+        <br/>
+        <br/>
+        Katie &amp; Sebasti&aacute;n.
+      </p>
+    </div>
+  </body>
+</html>
