@@ -53,15 +53,25 @@ describe Invitation do
 
   describe 'when being created' do
     it 'must send an invitation email' do
-      skip
-      # Skipped until I figure out how to stub Mailer class for the instance.
+      invitation = Invitation.new valid_invitation_params
+      mock = Minitest::Mock.new
+      mock.expect(:call, nil, [invitation])
+      Mailer.stub(:deliver_invitation, mock) do
+        invitation.save
+      end
+      mock.verify
     end
   end
 
   describe '#send_invitation_email' do
     it 'must not send it if invitation is not persisted' do
-      skip
-      # Skipped until I figure out how to stub Mailer class for the instance.
+      invitation = Invitation.new
+      mock       = Minitest::Mock.new
+      mock.expect(:call, nil, [invitation])
+      Mailer.stub(:deliver_invitation, mock) do
+        invitation.send_invitation_email
+      end
+      -> { mock.verify }.must_raise MockExpectationError
     end
   end
 
