@@ -3,6 +3,10 @@ require 'minitest/pride'
 require './boot'
 
 Mongoid.load! './config/mongoid.yml', 'test'
+ENV['BASE_URL'] = 'http://foo.test'
+Pony.options = {
+  via: :test
+}
 
 def valid_invitation
   Invitation.new valid_invitation_params

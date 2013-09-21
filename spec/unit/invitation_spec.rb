@@ -1,6 +1,70 @@
 require 'spec_helper'
 
 describe Invitation do
+  describe '#base_url' do
+    describe 'given BASE_URL env variable' do
+      it 'must equal to the BASE_URL env variable' do
+        ENV['BASE_URL'] = 'http://foobar.com'
+        Invitation.base_url.must_equal 'http://foobar.com'
+      end
+    end
+
+    describe 'given no BASE_URL env variable' do
+      it 'must fallback to http://weddinv.dev' do
+        # Because the @base_url variable is being memoized,
+        # we need to hack around it in the tests as we call the method
+        # several times before calling this test, so...
+        Invitation.instance_variable_set :@base_url, nil
+        ENV['BASE_URL'] = ''
+        Invitation.base_url.must_equal 'http://weddinv.dev'
+        ENV.delete 'BASE_URL'
+        Invitation.base_url.must_equal 'http://weddinv.dev'
+      end
+    end
+  end
+
+  describe '#invitation_link' do
+    before :all do
+      @invitation = Invitation.create valid_invitation_params
+    end
+
+    describe 'given the invitation has not been persisted' do
+      it 'must return nil' do
+        invitation = Invitation.new
+        invitation.invitation_link.must_be_nil
+      end
+    end
+
+    it 'must include base url' do
+      r = /#{Invitation.base_url}/
+      @invitation.invitation_link.must_match r
+    end
+
+    it 'must include its id' do
+      r = /#{@invitation.id}/
+      @invitation.invitation_link.must_match r
+    end
+
+    it 'must point to the rsvp endpoint' do
+      r = /#{Invitation.base_url}\/rsvp\/#{@invitation.id}/
+      @invitation.invitation_link.must_match r
+    end
+  end
+
+  describe 'when being created' do
+    it 'must send an invitation email' do
+      skip
+      # Skipped until I figure out how to stub Mailer class for the instance.
+    end
+  end
+
+  describe '#send_invitation_email' do
+    it 'must not send it if invitation is not persisted' do
+      skip
+      # Skipped until I figure out how to stub Mailer class for the instance.
+    end
+  end
+
   describe 'by default' do
     it 'must have status "pending"' do
       Invitation.new.status.must_equal 'pending'
