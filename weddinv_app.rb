@@ -34,7 +34,7 @@ class WeddinvApp < Sinatra::Base
   end
 
   post '/api/login', provides: [:json] do
-    if @user = User.authenticate(json['username'], json['password'])
+    if @user = User.authenticate(json[:username], json[:password])
       session[:user_id] = @user.id
       halt_ok
     else
@@ -114,8 +114,11 @@ class WeddinvApp < Sinatra::Base
   end
 
   def json
+    @json         ||= {}
     @request_body ||= request.body.rewind
-    @json         ||= JSON.parse(request.body.read) rescue {}
+    @parsed_json  ||= JSON.parse(request.body.read) rescue {}
+    @parsed_json.each_pair { |k, v| @json[k.to_sym] = v }
+    @json
   end
 
   def halt_ok
