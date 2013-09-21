@@ -7,3 +7,6 @@
 
 # Ignore Mongoid configuration file.
 /config/mongoid.yml
+
+# Ignore Foreman env file.
+/.env
