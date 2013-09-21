@@ -13,6 +13,9 @@ class Invitation
   # - Validations - #
   validates_presence_of :name, :email
 
+  # - Callbacks - #
+  after_create :send_invitation_email
+
   # - Class Methods - #
   class << self
     def params_hash params
@@ -21,6 +24,10 @@ class Invitation
         hash[k] = params[k] if params.keys.include?(k)
       end
       hash
+    end
+
+    def base_url
+      @base_url ||= ENV['BASE_URL'].present? ? ENV['BASE_URL'] : 'http://weddinv.dev'
     end
 
     protected
@@ -47,5 +54,15 @@ class Invitation
 
   def reject!
     update_attributes! status: 'rejected'
+  end
+
+  def invitation_link
+    "#{self.class.base_url}/rsvp/#{id}" if persisted?
+  end
+
+  protected
+
+  def send_invitation_email
+    Mailer.deliver_invitation self if persisted?
   end
 end
