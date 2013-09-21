@@ -24,6 +24,23 @@ class WeddinvApp < Sinatra::Base
     }
   end
 
+  configure :production do
+    # - Pony configuration - #
+    Pony.options = {
+      from: 'contact@example.org',
+      via:  :smtp,
+      via_options: {
+        user_name:            ENV['SENDGRID_USERNAME'],
+        password:             ENV['SENDGRID_PASSWORD'],
+        domain:               ENV['DOMAIN'],
+        address:              'smtp.sendgrid.net',
+        port:                 587,
+        authentication:       :plain,
+        enable_starttls_auto: true
+      }
+    }
+  end
+
   # - Sessions - #
   get '/api/user', provides: [:json] do
     if user_signed_in?
