@@ -5,25 +5,33 @@
     factory('Invitation', ['Restangular', function(Restangular) {
       var Invitation = Restangular.withConfig(function(config) {
         config.addElementTransformer('invitations', false, function(invitation) {
-          var validActions = ['accept', 'reject'],
-              rsvp         = function(action) {
-            if (_.contains(validActions, action)) {
-              return invitation.post(action);
-            } else {
-              return invitation;
-            }
-          };
+          invitation.rsvp = function(action) {
+            var validActions = ['accept', 'reject'];
 
-          invitation.resendEmail = function() {
-            return invitation.post('resend_email');
+            if (!action || !_.contains(validActions, action)) {
+              throw new Error('Confirmation action is not valid');
+            }
+
+            if (!invitation.id) {
+              throw new Error('Invitation is not persisted');
+            }
+
+            return invitation.post(action);
           };
 
           invitation.accept = function() {
-            return rsvp('accept');
+            return invitation.rsvp('accept');
           };
 
           invitation.reject = function() {
-            return rsvp('reject');
+            return invitation.rsvp('reject');
+          };
+
+          invitation.resendEmail = function() {
+            if (!invitation.id) {
+              throw new Error('Invitation is not persisted');
+            }
+            return invitation.post('resend_email');
           };
 
           invitation.isAccepted = function() {
