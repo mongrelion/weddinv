@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Mailer do
+describe InvitationMailer do
   describe '#invitation_rich_template' do
     it 'must render a HTML document' do
-      template = Mailer.rich_template
+      template = InvitationMailer.rich_template
       template.gsub(/(\s|\n)/, '').must_match(/<\w.+>.+<\/\w.+>/)
     end
   end
 
   describe '#invitation_plain_template' do
     it 'must render a plain text template' do
-      template = Mailer.plain_template
+      template = InvitationMailer.plain_template
       template.must_match(/We would like to know/)
     end
   end
@@ -18,14 +18,14 @@ describe Mailer do
   describe '#deliver_invitation' do
     it 'must accept an invitation' do
       [nil, :foo, 'bar', 123, false, Object.new, Invitation].each do |param|
-        -> { Mailer.deliver_invitation param }.must_raise ArgumentError
+        -> { InvitationMailer.deliver_invitation param }.must_raise ArgumentError
       end
     end
 
     describe 'for the outgoing email' do
       before :all do
         @invitation = Invitation.create valid_invitation_params
-        @mail       = Mailer.deliver_invitation @invitation
+        @mail       = InvitationMailer.deliver_invitation @invitation
       end
 
       it 'must send a text/plain body' do

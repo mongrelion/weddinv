@@ -1,4 +1,4 @@
-class Mailer
+class InvitationMailer
   # - Class Methods - #
   class << self
     def deliver_invitation invitation
@@ -16,11 +16,11 @@ class Mailer
     end
 
     def rich_template
-      ERB.new(File.read File.join('views', 'mailer', 'deliver_invitation.html.erb')).result binding
+      ERB.new(File.read File.join('views', 'invitation_mailer', 'deliver_invitation.html.erb')).result binding
     end
 
     def plain_template
-      ERB.new(File.read File.join('views', 'mailer', 'deliver_invitation.txt.erb')).result binding
+      ERB.new(File.read File.join('views', 'invitation_mailer', 'deliver_invitation.txt.erb')).result binding
     end
   end
 end

@@ -4,8 +4,7 @@ describe Invitation do
   describe '#base_url' do
     describe 'given BASE_URL env variable' do
       it 'must equal to the BASE_URL env variable' do
-        ENV['BASE_URL'] = 'http://foobar.com'
-        Invitation.base_url.must_equal 'http://foobar.com'
+        Invitation.base_url.must_equal 'http://foo.test'
       end
     end
 
@@ -56,7 +55,7 @@ describe Invitation do
       invitation = Invitation.new valid_invitation_params
       mock = Minitest::Mock.new
       mock.expect(:call, nil, [invitation])
-      Mailer.stub(:deliver_invitation, mock) do
+      InvitationMailer.stub(:deliver_invitation, mock) do
         invitation.save
       end
       mock.verify
@@ -68,7 +67,7 @@ describe Invitation do
       invitation = Invitation.new
       mock       = Minitest::Mock.new
       mock.expect(:call, nil, [invitation])
-      Mailer.stub(:deliver_invitation, mock) do
+      InvitationMailer.stub(:deliver_invitation, mock) do
         invitation.send_invitation_email
       end
       -> { mock.verify }.must_raise MockExpectationError

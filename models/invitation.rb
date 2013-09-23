@@ -61,6 +61,6 @@ class Invitation
   end
 
   def send_invitation_email
-    Mailer.deliver_invitation self if persisted?
+    InvitationMailer.deliver_invitation self if persisted?
   end
 end
