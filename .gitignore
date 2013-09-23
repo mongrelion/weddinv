@@ -10,3 +10,6 @@
 
 # Ignore Foreman env file.
 /.env
+
+# Ignore coverage reportes
+/coverage/
