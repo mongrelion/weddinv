@@ -17,6 +17,14 @@
       };
 
       Session.login = function(username, password, success, error) {
+        if (!username || 'string' !== typeof(username)) {
+          throw new Error('invalid username');
+        }
+
+        if (!password || 'string' !== typeof(password)) {
+          throw new Error('invalid password');
+        }
+
         return Restangular.
           all('login').
           post({ username : username, password : password }).
@@ -29,13 +37,16 @@
           });
       };
 
-      Session.logout = function() {
-        return Restangular.
-          all('logout').
-          post().
-          then(function() {
-            Session.loggedIn = false;
-          });
+      Session.logout = function(success, fail) {
+        if (Session.loggedIn) {
+          return Restangular.
+            all('logout').
+            post().
+            then(function() {
+              Session.loggedIn = false;
+              if (success) success();
+            }, fail);
+        }
       };
 
       return Session;
