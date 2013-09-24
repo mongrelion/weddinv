@@ -6,7 +6,7 @@
             return response;
           }, function(response) {
             if (403 == response.status) {
-              $location.path('/login');
+              return $location.path('/login');
             }
             return $q.reject(response);
           });
