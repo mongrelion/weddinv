@@ -3,16 +3,18 @@
 
   angular.module('weddinvApp').
     controller('InvitationsListCtrl', ['$scope', 'Invitation', function($scope, Invitation) {
-      var loadInvitations = function() {
+      this.loadInvitations = function() {
         Invitation.
           all('invitations').
           getList().
           then(function(invitations) {
             $scope.invitations = invitations;
+          }, function() {
+            alert('Something went wrong');
           });
       };
 
-      loadInvitations();
+      this.loadInvitations();
 
       $scope.search          = { status : '', name : '' };
       $scope.filters         = [
@@ -24,17 +26,17 @@
 
       $scope.resendEmail = function($index) {
         var invitation = $scope.invitations[$index];
-        window.invitation = invitation;
         if (confirm('Are you sure?')) {
           invitation.resendEmail();
         }
       };
 
+      var self = this;
       $scope.destroy = function($index) {
         if (confirm('Are you sure?')) {
           var invitation = $scope.invitations[$index];
           invitation.remove().then(function() {
-            loadInvitations();
+            self.loadInvitations();
           });
         }
       };
