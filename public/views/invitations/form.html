@@ -25,6 +25,16 @@
 
   <div class="control-group">
     <div class="controls">
+      <select
+      class="span4"
+      ng-model="invitation.lang"
+      ng-required="true"
+      ng-options="lang.value as lang.name for lang in [{ name : 'English', value : 'en' }, { name : 'Spanish', value : 'es' }]"></select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
       <label class="checkbox">
         <input type="checkbox" ng-model="invitation.plus_one" />Plus One?
       </label>

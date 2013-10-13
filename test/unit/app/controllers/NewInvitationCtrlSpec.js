@@ -20,8 +20,8 @@
       spyOn($location, 'path');
     }));
 
-    it('should initialize a invitation object in the scope', function() {
-      expect($scope.invitation).toEqual({});
+    it('should initialize a invitation object in the scope with lang "en" by default', function() {
+      expect($scope.invitation).toEqual({ lang : 'en' });
     });
 
     describe('.save', function() {

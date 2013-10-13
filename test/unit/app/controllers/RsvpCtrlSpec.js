@@ -2,12 +2,13 @@
   'use strict';
 
   describe('RsvpCtrl', function() {
-    var $httpBackend, $controller, $scope, Invitation;
+    var $httpBackend, $translate, $controller, $scope, Invitation;
     beforeEach(module('weddinvApp'));
     beforeEach(inject(function($injector) {
       $scope           = $injector.get('$rootScope').$new();
       Invitation       = $injector.get('Invitation');
       $httpBackend     = $injector.get('$httpBackend');
+      $translate       = $injector.get('$translate');
       $controller      = $injector.get('$controller');
     }));
 
@@ -38,6 +39,27 @@
         $httpBackend.flush();
         expect($scope.invitation).toBeDefined();
         expect($scope.invitation.id).toBe(123);
+      });
+
+      it('should tell $translate service what language to use from the invitation lang', function() {
+        spyOn($translate, 'uses');
+        $httpBackend.expectGET('/api/invitations/123').respond({ id : 123, lang : 'es' });
+        $controller('RsvpCtrl', {
+          '$scope'       : $scope,
+          '$routeParams' : { id : 123 },
+          'Invitation'   : Invitation
+        });
+        $httpBackend.flush();
+        expect($translate.uses).toHaveBeenCalledWith('es');
+
+        $httpBackend.expectGET('/api/invitations/123').respond({ id : 123, lang : 'ru' });
+        $controller('RsvpCtrl', {
+          '$scope'       : $scope,
+          '$routeParams' : { id : 123 },
+          'Invitation'   : Invitation
+        });
+        $httpBackend.flush();
+        expect($translate.uses).toHaveBeenCalledWith('ru');
       });
 
       describe('given the requested invitation is pending', function() {

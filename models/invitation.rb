@@ -9,6 +9,7 @@ class Invitation
   field :plus_one_count,           type: Integer, default: 0
   field :plus_one_name,            type: String
   field :attending_plus_one_count, type: Integer, default: 0
+  field :lang,                     type: String,  default: 'en'
 
   # - Validations - #
   validates_presence_of :name, :email
@@ -40,7 +41,8 @@ class Invitation
         :plus_one,
         :plus_one_name,
         :plus_one_count,
-        :attending_plus_one_count
+        :attending_plus_one_count,
+        :lang
       ]
     end
   end

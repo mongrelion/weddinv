@@ -1,20 +1,19 @@
 <div class="header">
   <h1>Kattie Potts &amp; Sebasti&aacute;n Le&oacute;n</h1>
   <h4>
-    <span>would like to you know if you</span>
+    <span>{{'rsvpCopyParagraph1' | translate}}</span>
     <span><b>{{invitation.name}}</b></span>
-    <span ng-show="invitation.plus_one"> and <b>{{invitation.plus_one_name}}</b></span>
-    <span>
-      are able to attend their wedding. Please RSVP by the 15th of November 2013.
-      We hope you can make it!
+    <span ng-show="invitation.plus_one">
+      &amp; <b>{{invitation.plus_one_name}}</b>
     </span>
+    <span ng-hide="invitation.plus_one">{{'rsvpCopyParagraph2Singular' | translate}}</span>
+    <span ng-show="invitation.plus_one">{{'rsvpCopyParagraph2Plural' | translate}}</span>
   </h4>
 </div>
 
-
 <p>
   <i class="bicon-watch"></i>
-  <span>Saturday, 4th of January - 2014 at 3pm COT</span>
+  <span>{{'weddingDate' | translate}}</span>
 </p>
 
 <p>

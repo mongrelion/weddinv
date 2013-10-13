@@ -90,6 +90,10 @@ describe Invitation do
     it 'must set attending_plus_one_count to 0' do
       Invitation.new.attending_plus_one_count.must_equal 0
     end
+
+    it 'must set lang to "en"' do
+      Invitation.new.lang.must_equal 'en'
+    end
   end
 
   it 'must be invalid without a name' do
@@ -121,7 +125,8 @@ describe Invitation do
           plus_one:                 true,
           plus_one_name:            'Jenny Smith',
           plus_one_count:           1,
-          attending_plus_one_count: 1
+          attending_plus_one_count: 1,
+          lang:                     'ru'
         }
         result = Invitation.params_hash params
         params.each_pair do |key, value|

@@ -3,7 +3,8 @@
 
   angular.module('weddinvApp').
     controller('NewInvitationCtrl', ['$scope', '$location', 'Invitation', function($scope, $location, Invitation) {
-      $scope.invitation = {};
+      $scope.invitation = { lang : 'en' };
+
       $scope.save = function() {
         Invitation.
           all('invitations').

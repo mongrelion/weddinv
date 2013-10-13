@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('weddinvApp').
-    controller('RsvpCtrl', ['$scope', '$routeParams', 'Invitation', function($scope, $params, Invitation) {
+    controller('RsvpCtrl', ['$scope', '$routeParams', '$translate', 'Invitation', function($scope, $params, $translate, Invitation) {
       Invitation.
         one('invitations', $params.id).
         get().
@@ -13,6 +13,7 @@
           }
 
           $scope.invitation = invitation;
+          $translate.uses(invitation.lang);
 
           var pocMap = [];
           for (var i = 0; i <= invitation.plus_one_count; i++) {
